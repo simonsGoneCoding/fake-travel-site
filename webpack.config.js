@@ -14,8 +14,16 @@ module.exports = {
     filename: "bundled.js",
     path: path.resolve(__dirname, "app")
   },
+  devServer: {
+    before: function(app, server) {
+      server._watch("./app/**/*.html");
+    },
+    contentBase: path.join(__dirname, "app"),
+    hot: true, // hot modual replacement (inject css and js into the browsers memory without needing to refresh)
+    port: 3000,
+    host: "0.0.0.0" // allows other devices like phone to acces app
+  },
   mode: "development",
-  watch: true, //auto-generate 'pm run dev' (in package.json:   scripts: {"dev": "webpack"}) to stop ctrl + c in terminal
   module: {
     rules: [
       {
