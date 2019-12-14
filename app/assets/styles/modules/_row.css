@@ -17,6 +17,18 @@
     padding-right: 100px;
   }
 
+  &--spacing-small {
+    margin-right: -45px;
+  }
+
+  &--spacing-small > div {
+    padding-right: 45px;
+  }
+
+  &--top-padding {
+    padding-top: 80px;
+  }
+
   &__bottom-margin-until-medium {
     margin-bottom: 1rem;
   }
@@ -47,6 +59,16 @@
     &__medium-6 {
       float: left;
       width: 50%;
+    }
+  }
+  /*begin equal height rules */
+  &--equal-height-at-medium {
+    @mixin atMedium {
+      display: flex;
+    }
+    & > div {
+      float: none;
+      display: flex;
     }
   }
 }
