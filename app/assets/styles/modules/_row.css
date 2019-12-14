@@ -61,9 +61,49 @@
       width: 50%;
     }
   }
-  /*begin equal height rules */
+
+  @mixin atLarge {
+    &__bottom-margin-until-large {
+      margin-bottom: 0;
+    }
+
+    &__large-4 {
+      float: left;
+      width: 33.33%;
+    }
+
+    &__large-4--larger {
+      width: 37%;
+    }
+
+    &__large-8 {
+      float: left;
+      width: 66.66%;
+    }
+
+    &__large-8--smaller {
+      width: 63%;
+    }
+
+    &__large-6 {
+      float: left;
+      width: 50%;
+    }
+  }
+
+  /*   -----begin equal height rules -----   */
   &--equal-height-at-medium {
     @mixin atMedium {
+      display: flex;
+    }
+    & > div {
+      float: none;
+      display: flex;
+    }
+  }
+
+  &--equal-height-at-large {
+    @mixin atLarge {
       display: flex;
     }
     & > div {
