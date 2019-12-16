@@ -1,0 +1,20 @@
+.site-header {
+  position: absolute;
+  width: 100%;
+  padding: 10px 0;
+  z-index: 2;
+  /*background-color: rgba(47, 85, 114, 0.3);*/
+  background-color: rgba($mainBlue, 0.3);
+  /*postcss-hexrgba pack allows to use variables */
+
+  &__btn-container {
+    float: right;
+  }
+
+  &__logo {
+    position: absolute;
+    top: 0;
+    background-color: $mainBlue;
+    padding: 20px 25px;
+  }
+}
