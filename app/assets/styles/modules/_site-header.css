@@ -42,10 +42,14 @@
     }
   }
 
-  &__menu-conntent {
+  &__menu-content {
     display: none;
 
     @mixin atMedium {
+      display: block;
+    }
+
+    &--active {
       display: block;
     }
   }
