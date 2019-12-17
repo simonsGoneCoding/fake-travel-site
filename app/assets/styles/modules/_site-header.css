@@ -3,9 +3,12 @@
   width: 100%;
   padding: 10px 0;
   z-index: 2;
-  /*background-color: rgba(47, 85, 114, 0.3);*/
-  background-color: rgba($mainBlue, 0.3);
-  /*postcss-hexrgba pack allows to use variables */
+
+  @mixin atMedium {
+    /*background-color: rgba(47, 85, 114, 0.3);*/
+    background-color: rgba($mainBlue, 0.3);
+    /*postcss-hexrgba pack allows to use variables */
+  }
 
   &__btn-container {
     float: right;
@@ -14,7 +17,36 @@
   &__logo {
     position: absolute;
     top: 0;
+    left: 50%;
+    transform: translateX(-50%);
     background-color: $mainBlue;
-    padding: 20px 25px;
+    padding: 15px 29px;
+
+    @mixin atMedium {
+      left: auto;
+      transform: translateX(0);
+      padding: 25px 36px;
+    }
+  }
+
+  &__menu-icon {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 20px;
+    height: 20px;
+    background-color: white;
+
+    @mixin atMedium {
+      display: none;
+    }
+  }
+
+  &__menu-conntent {
+    display: none;
+
+    @mixin atMedium {
+      display: block;
+    }
   }
 }
