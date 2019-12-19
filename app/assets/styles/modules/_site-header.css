@@ -3,6 +3,11 @@
   width: 100%;
   padding: 10px 0;
   z-index: 2;
+  transition: background-color 0.4s ease-out;
+
+  &--active {
+    background-color: rgba($mainBlue, 0.55);
+  }
 
   @mixin atMedium {
     /*background-color: rgba(47, 85, 114, 0.3);*/
@@ -11,7 +16,9 @@
   }
 
   &__btn-container {
-    float: right;
+    @mixin atMedium {
+      float: right;
+    }
   }
 
   &__logo {
@@ -36,6 +43,7 @@
     width: 20px;
     height: 20px;
     background-color: white;
+    z-index: 10;
 
     @mixin atMedium {
       display: none;
@@ -43,14 +51,25 @@
   }
 
   &__menu-content {
-    display: none;
+    position: relative;
+    opacity: 0;
+    transform: scale(1.2);
+    transition: all 0.4s ease-out;
+    padding-top: 90px;
+    text-align: center;
+    z-index: -9;
 
     @mixin atMedium {
-      display: block;
+      opacity: 1;
+      z-index: 1;
+      padding-top: 0;
+      transform: scale(1);
     }
 
     &--active {
-      display: block;
+      transform: scale(1);
+      opacity: 1;
+      z-index: 1;
     }
   }
 }
