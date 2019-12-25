@@ -13,7 +13,11 @@ class EventOnScroll {
   }
 
   calcCaller() {
-    this.itemsToReveal.forEach(item => this.calculateIfScrolledTo(item));
+    this.itemsToReveal.forEach(item => {
+      if (item.isRevealed === false) {
+        this.calculateIfScrolledTo(item);
+      }
+    });
   }
 
   calculateIfScrolledTo(item) {
@@ -23,11 +27,19 @@ class EventOnScroll {
     // console.log(scrollPercent + " %");
     if (scrollPercent < 99) {
       item.classList.add("reveal-item--is-visible");
+      item.isRevealed = true;
+      if (item.isLastItem) {
+        window.removeEventListener("scroll", this.scrollThrottle);
+      }
     }
   }
 
   hideInitially() {
-    this.itemsToReveal.forEach(item => item.classList.add("reveal-item"));
+    this.itemsToReveal.forEach(item => {
+      item.classList.add("reveal-item");
+      item.isRevealed = false;
+    });
+    this.itemsToReveal[this.itemsToReveal.length - 1].isLastItem = true;
   }
 }
 
