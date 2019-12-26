@@ -1,8 +1,11 @@
-import throttle from "lodash/throttle";
+import throttle from "lodash/throttle"; // scrolling event
+import debounce from "lodash/debounce"; // window resizng
 
 class EventOnScroll {
-  constructor() {
-    this.itemsToReveal = document.querySelectorAll(".feature-item");
+  constructor(elements, thresholdPercent) {
+    this.thresholdPercent = thresholdPercent;
+    this.itemsToReveal = elements; // element parameter refers to EventOnScroll class in App.js
+    this.browserHeight = window.innerHeight;
     this.hideInitially();
     this.scrollThrottle = throttle(this.calcCaller, 200).bind(this);
     this.events();
@@ -10,6 +13,12 @@ class EventOnScroll {
 
   events() {
     window.addEventListener("scroll", this.scrollThrottle);
+    window.addEventListener(
+      "resize", // re-calculating window height if window size changed
+      debounce(() => {
+        this.browserHeight = window.innerHeight;
+      }, 250)
+    );
   }
 
   calcCaller() {
@@ -21,15 +30,17 @@ class EventOnScroll {
   }
 
   calculateIfScrolledTo(item) {
-    // console.log(item.getBoundingClientRect().y);
-    const scrollPercent =
-      (item.getBoundingClientRect().top / window.innerHeight) * 100;
-    // console.log(scrollPercent + " %");
-    if (scrollPercent < 99) {
-      item.classList.add("reveal-item--is-visible");
-      item.isRevealed = true;
-      if (item.isLastItem) {
-        window.removeEventListener("scroll", this.scrollThrottle);
+    if (window.scrollY + this.browserHeight > item.offsetTop) {
+      const scrollPercent =
+        (item.getBoundingClientRect().top / this.browserHeight) * 100; //getBoundingClientRect() method returns size of an  element and its position relative to the viewport.
+
+      if (scrollPercent < this.thresholdPercent) {
+        //  this.thresholdPercent is the second argument in EventOnScroll class (App.js)
+        item.classList.add("reveal-item--is-visible");
+        item.isRevealed = true;
+        if (item.isLastItem) {
+          window.removeEventListener("scroll", this.scrollThrottle);
+        }
       }
     }
   }
